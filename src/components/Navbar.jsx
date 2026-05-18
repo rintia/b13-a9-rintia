@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import logo from '../assets/logo.jpg'
+import Link from 'next/link';
 const Navbar = () => {
     return (
         <div className="navbar bg-base-100 shadow-sm">
@@ -20,20 +21,18 @@ const Navbar = () => {
         <li><a>Add Pet</a></li>
       </ul>
     </div>
-    <a className="btn btn-ghost text-xl"><Image src={logo} height={150} width={90}></Image></a>
+    <a className="btn btn-ghost text-xl"><Image src={logo} height={150} width={90} alt='logo'></Image></a>
   </div>
   <div className="navbar-center hidden lg:flex">
-    <ul className="menu menu-horizontal px-1">
-    <li><a>Home</a></li>
-        <li>
-          <a>All Pets</a>
-        </li>
-        <li><a>My Requests</a></li>
-        <li><a>Add Pet</a></li>
+    <ul className="menu menu-horizontal gap-4">
+    <Link href={'/'}><li>Home</li></Link>
+        <Link href={'/all-pets'}><li>All Pets</li></Link>
+        <Link href={'/my-requests'}><li>My Requests</li></Link>
+        <Link href={'/add-pet'}><li>Add Pet</li></Link>
     </ul>
   </div>
   <div className="navbar-end">
-    <a className="btn">Login</a>
+    <a className="btn bg-[#56B6C6] text-white">Login</a>
   </div>
 </div>
     );
