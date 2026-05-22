@@ -140,11 +140,11 @@ const Navbar = () => {
                 <div className="absolute right-0 mt-3 w-52 bg-white rounded-2xl shadow-lg border border-[#56B6C6]/30 overflow-hidden">
 
                   <Link
-                    href="/dashboard"
+                    href="/my-listings"
                     onClick={() => setOpen(false)}
                     className="block px-4 py-3 hover:bg-[#56B6C6]/20 text-[#170C79]"
                   >
-                    Dashboard
+                    My Listings
                   </Link>
 
                   <button
