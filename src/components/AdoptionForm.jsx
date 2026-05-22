@@ -19,23 +19,53 @@ const AdoptionForm = ({ pet }) => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const payload = {
-      petId: pet._id,
-      petName: pet.petName,
-      userName: user.name,
-      userEmail: user.email,
-      pickupDate: form.pickupDate,
-      message: form.message,
-      status: "pending",
-    };
+  if (!user) {
+    alert("Please login first");
+    return;
+  }
 
-    console.log(payload);
-
-    // TODO: send to backend
+  const payload = {
+    petId: pet._id,
+    petName: pet.petName,
+    userName: user.name,
+    userEmail: user.email,
+    pickupDate: form.pickupDate,
+    message: form.message,
+    status: "pending",
   };
+
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/request`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      }
+    );
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.message || "Request failed");
+    }
+
+    alert("Adoption request sent 🐾");
+
+    setForm({
+      pickupDate: "",
+      message: "",
+    });
+  } catch (err) {
+    console.error(err);
+    alert("Failed to send request");
+  }
+};
 
   return (
     <div className="bg-white rounded-3xl shadow-lg border-2 border-[#56B6C6]/20 p-6 h-fit">

@@ -6,14 +6,13 @@ import { useState } from "react";
 import { FaPaw, FaCloudUploadAlt } from "react-icons/fa";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
 export default function AddPetForm() {
   const router = useRouter();
 
-  // Replace with your logged in user
-  const user = {
-    email: "user@gmail.com",
-  };
+   const userData = authClient.useSession();
+    const user = userData.data?.user;
 
   const [loading, setLoading] = useState(false);
 
@@ -29,7 +28,7 @@ export default function AddPetForm() {
     location: "",
     adoptionFee: "",
     description: "",
-    ownerEmail: user.email,
+    ownerEmail: user.email || '',
   });
 
   // Handle Input Change
@@ -48,7 +47,7 @@ export default function AddPetForm() {
       setLoading(true);
 
       // Replace with your API route
-      const response = await fetch("/api/pets", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/pets`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
