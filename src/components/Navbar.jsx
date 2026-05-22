@@ -15,8 +15,8 @@ const Navbar = () => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
 
-
-  const { user, refresh } = useAuth();
+  const userData = authClient.useSession();
+  const user = userData.data?.user;
 
   const navItems = [
     { name: "Home", path: "/" },
@@ -27,16 +27,11 @@ const Navbar = () => {
 
 
 
-  const handleProtectedClick = (e, item) => {
-    if (item.private && !user) {
-      e.preventDefault();
-      router.push("/login");
-    }
-  };
+
 
   const handleLogout = async () => {
     await authClient.signOut();
-    setUser(null);
+    
     setOpen(false);
     router.push("/");
   };
@@ -57,7 +52,7 @@ const Navbar = () => {
             <ul className="menu menu-sm dropdown-content bg-white rounded-2xl mt-3 w-56 p-3 shadow border border-[#56B6C6]/30">
 
               {navItems.map((item) => {
-                if (item.private && !user) return null;
+                
 
                 return (
                   <li key={item.path}>
@@ -98,7 +93,7 @@ const Navbar = () => {
               <li key={item.path}>
                 <Link
                   href={item.path}
-                  onClick={(e) => handleProtectedClick(e, item)}
+                 
                   className={`px-4 py-2 rounded-full font-semibold transition
         ${pathname === item.path
                       ? "bg-[#56B6C6] text-white shadow"

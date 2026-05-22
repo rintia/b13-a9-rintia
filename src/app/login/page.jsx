@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaGoogle } from "react-icons/fa";
+import { toast } from "react-toastify";
 import { authClient } from "../../lib/auth-client";
 
 export default function LoginPage() {
@@ -23,35 +24,45 @@ export default function LoginPage() {
     });
   };
 
-  // Email login
-  const handleLogin = async (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
+    const { data, error } = await authClient.signIn.email({
+      email: form.email,
+      password: form.password,
+      callbackURL: "/",
+    });
+
+    console.log({ data, error });
+
+    setLoading(false);
+
+    if (error) {
+      toast.error(error.message || "Login failed ❌");
+      return;
+    }
+
+    toast.success("Login Successful 🐾");
+    router.push("/");
+  };
+
+  const handleGoogleLogin = async () => {
     try {
-      setLoading(true);
-
-      await authClient.signIn.email({
-        email: form.email,
-        password: form.password,
+      const { error } = await authClient.signIn.social({
+        provider: "google",
+        callbackURL: "/",
       });
-      await refresh();
+
+      if (error) {
+        toast.error(error.message || "Google login failed ❌");
+        return;
+      }
+
       router.push("/");
     } catch (err) {
       console.log(err);
-      alert("Login failed");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Google login
-  const handleGoogleLogin = async () => {
-    try {
-      await authClient.signIn.social({
-        provider: "google",
-      });
-    } catch (err) {
-      console.log(err);
+      toast.error("Something went wrong ❌");
     }
   };
 
@@ -62,11 +73,13 @@ export default function LoginPage() {
         {/* Header */}
         <div className="bg-[#170C79] text-white text-center p-8">
           <h1 className="text-3xl font-extrabold">Welcome Back 🐾</h1>
-          <p className="text-white/80 mt-2">Login to find your furry friends</p>
+          <p className="text-white/80 mt-2">
+            Login to find your furry friends
+          </p>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleLogin} className="p-8 space-y-5">
+        <form onSubmit={onSubmit} className="p-8 space-y-5">
 
           {/* Email */}
           <div>
