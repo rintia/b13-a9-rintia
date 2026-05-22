@@ -1,7 +1,7 @@
 import PetCard from "@/components/PetCard";
 
 const AllPetsPage = async () => {
-  const res = await fetch("http://localhost:5000/pets", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/pets`, {
     cache: "no-store",
   });
 

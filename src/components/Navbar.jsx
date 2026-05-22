@@ -20,7 +20,7 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Home", path: "/" },
-    { name: "All Pets", path: "/all-pets" },
+    { name: "All Pets", path: "/pets" },
     { name: "My Requests", path: "/my-requests", private: true },
     { name: "Add Pet", path: "/add-pet", private: true },
   ];
