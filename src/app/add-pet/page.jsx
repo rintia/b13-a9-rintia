@@ -28,7 +28,7 @@ export default function AddPetForm() {
     location: "",
     adoptionFee: "",
     description: "",
-    ownerEmail: user.email || '',
+    ownerEmail: user?.email || '',
   });
 
   // Handle Input Change
