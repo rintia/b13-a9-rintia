@@ -11,26 +11,31 @@ export default function MyRequestsPage() {
   const userData = authClient.useSession();
   const user = userData.data?.user;
 
-  useEffect(() => {
-    const fetchRequests = async () => {
-      if (!user?.email) return;
+useEffect(() => {
+  const fetchRequests = async () => {
+    if (!user?.email) {
+      setLoading(false);
+      return;
+    }
 
-      try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/request?email=${user.email}`
-        );
-        const data = await res.json();
+    try {
+      setLoading(true);
 
-        setRequests(data);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/request?email=${user.email}`
+      );
 
-    fetchRequests();
-  }, [user]);
+      const data = await res.json();
+      setRequests(data);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchRequests();
+}, [user?.email]);
 
   const handleCancel = async (id) => {
     const confirm = window.confirm("Cancel this request?");
