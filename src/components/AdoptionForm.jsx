@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { authClient } from "../lib/auth-client";
+import toast from "react-hot-toast";
 
 const AdoptionForm = ({ pet }) => {
   const [form, setForm] = useState({
@@ -27,6 +28,9 @@ const handleSubmit = async (e) => {
     alert("Please login first");
     return;
   }
+  
+    toast.success('adoption request sent successfully')
+  
 
   const payload = {
     petId: pet._id,
