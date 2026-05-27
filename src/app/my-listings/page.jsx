@@ -74,9 +74,9 @@ const MyListingsPage = () => {
         );
     }
 
-    const handleShowRequests = async (petId) => {
+    const handleShowRequests = async (userId) => {
         const res = await fetch(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/requests/${petId}`
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/requests/${userId}`
         );
 
         const data = await res.json();
