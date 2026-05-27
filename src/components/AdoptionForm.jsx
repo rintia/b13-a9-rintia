@@ -11,6 +11,7 @@ const AdoptionForm = ({ pet }) => {
 
   const userData = authClient.useSession();
     const user = userData.data?.user;
+    console.log(user);
 
   const handleChange = (e) => {
     setForm({
