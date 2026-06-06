@@ -22,7 +22,7 @@ useEffect(() => {
       setLoading(true);
 
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/request?email=${user.email}`
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/requests?email=${user.email}`
       );
 
       const data = await res.json();
@@ -43,7 +43,7 @@ useEffect(() => {
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/request/${id}`,
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/requests/${id}`,
         {
           method: "DELETE",
         }

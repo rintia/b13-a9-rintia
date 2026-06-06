@@ -44,7 +44,7 @@ const handleSubmit = async (e) => {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/request`,
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/requests`,
       {
         method: "POST",
         headers: {
