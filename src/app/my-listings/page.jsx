@@ -74,9 +74,9 @@ const MyListingsPage = () => {
         );
     }
 
-    const handleShowRequests = async (userId) => {
+    const handleShowRequests = async (petId) => {
         const res = await fetch(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/requests/${userId}`
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/requests/${petId}`
         );
 
         const data = await res.json();
@@ -178,7 +178,7 @@ const MyListingsPage = () => {
                                 <div className="grid grid-cols-2 gap-3 mt-6">
 
                                     <button
-                                        onClick={() => handleShowRequests(pet._id)}
+                                        onClick={() => handleShowRequests(pet.petId)}
                                         className="btn rounded-2xl bg-[#56B6C6] hover:bg-[#170C79] text-white border-none"
                                     >
                                         <FaClipboardList />
