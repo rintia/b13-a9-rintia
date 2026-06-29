@@ -1,3 +1,4 @@
+import Link from "next/link";
 
 
 const Banner = () => {
@@ -13,9 +14,11 @@ const Banner = () => {
         </p>
 
         <div className="flex justify-center">
+          <Link href='/pets'>
           <button className="uppercase bg-cyan-500 px-5 py-3 cursor-pointer">
             Adopt Now
           </button>
+          </Link>
         </div>
       </div>
 

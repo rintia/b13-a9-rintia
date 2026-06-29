@@ -6,7 +6,7 @@ A full-stack pet adoption web application where users can list pets for adoption
 
 ## 🌐 Live URL
 
-👉 https://your-live-site-url.com
+👉 https://b13-a9-rintia.vercel.app
 
 ---
 

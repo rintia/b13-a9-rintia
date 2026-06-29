@@ -146,6 +146,20 @@ const Navbar = () => {
                   >
                     My Listings
                   </Link>
+                  <Link
+                    href="/my-requests"
+                    onClick={() => setOpen(false)}
+                    className="block px-4 py-3 hover:bg-[#56B6C6]/20 text-[#170C79]"
+                  >
+                    My Requests
+                  </Link>
+                  <Link
+                    href="/add-pet"
+                    onClick={() => setOpen(false)}
+                    className="block px-4 py-3 hover:bg-[#56B6C6]/20 text-[#170C79]"
+                  >
+                    Add Pet
+                  </Link>
 
                   <button
                     onClick={handleLogout}
